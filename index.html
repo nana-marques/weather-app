@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- <script type="text/javascript" src="package.json"></script> -->
+    <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+    <script type="text/javascript" src="./main.js"></script>
+    <title>Weather App</title>
+</head>
+<body>
+    <div class="container">
+        <form action="">
+            <div class="card">
+                <label for="search">
+                    <input type="text" class="input" name="search">
+                    <button type="submit" class="submit"><i class="fa fa-search"></i></button>
+                </label>
+                <div>
+                    <div class="image">
+                        <img src="images/clouds.png" alt="">
+                    </div>
+                    <div class="div-degrees">
+                        <p class="number"></p>
+                        <p class="degrees">°C</p>
+                    </div>
+                    <div class="div-city">
+                        <i class="fa fa-location-dot"></i>
+                        <p class="city">Sao Paulo</p>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
