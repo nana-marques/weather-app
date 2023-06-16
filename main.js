@@ -1,10 +1,5 @@
-// import { api } from "./keys.js";
-// const {apikeys} = require("./keys.js");
-// console.log(apikeys);
-
-console.log(api2);
-
-const apikey = '72f0cd752e8965e979958e5388c99f3f';
+import { api } from './keys.js';
+console.log(api.key);
 
 const apiurl = "https://api.openweathermap.org/data/2.5/weather?units=metric&";
 
@@ -14,7 +9,7 @@ const search = document.querySelector(".search input");
 const searchBtn = document.querySelector(".search button");
 
 async function checkWeather(city){
-    const response = await fetch(apiurl + city +`&appid=${apikey}`);
+    const response = await fetch(apiurl + city +`&appid=${api.key}`);
     var data = await response.json();
     console.log(data);
 
