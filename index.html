@@ -8,21 +8,23 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- <script type="text/javascript" src="package.json"></script> -->
-    <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
-    <script type="module" src="./main.js"></script>
+    <!-- <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script> -->
+    <!-- <script type="module" src="./main.js"></script> -->
+    <!-- <script type="text/javascript" src="./main.js"></script> -->
+    <script type="text/javascript" src="./keys.js"></script>
     <title>Weather App</title>
 </head>
 <body>
     <div class="container">
-        <form>
+        <div>
             <div class="card">
-                <label for="search">
-                    <input type="text" class="input" name="search" id="input" placeholder="Search for a city">
-                    <button type="submit" class="submit"><i class="fa fa-search"></i></button>
-                </label>
+                <div class="search">
+                    <input type="text" class="searching" placeholder="Search for a city">
+                    <button id="submitBtn"><i class="fa fa-search"></i></button>  
                 <div>
-                    <div class="image">
-                        <img src="images/clouds.png" alt="">
+                </div>
+                    <div class="imagediv">
+                        <img src="images/clouds.png" class="image" alt="">
                     </div>
                     <div class="div-degrees">
                         <p class="number">20</p>
@@ -34,7 +36,69 @@
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
 </body>
+<script> 
+    const url1 = "https://api.openweathermap.org/data/2.5/weather?units=metric&";
+    const url2 = "http://api.openweathermap.org/geo/1.0/direct?q=";
+
+    const searchBox = document.querySelector(".search input");
+    const searchBtn = document.querySelector(".search button");
+
+    const weatherIcon = document.querySelector(".image");
+
+    async function checkWeather(city){
+
+        const response1 = await fetch(url2 + city +`&appid=${api}`);
+        var data1 = await response1.json();
+        console.log(data1);
+
+        const toregex = `/^.*${city}.*$/`;
+        // console.log(city);
+        // console.log(data1[0].name);
+        // console.log(toregex);
+
+        const coordinates = data1.find((data1) => data1[0].name == toregex)
+        console.log(coordinates.lat);
+        console.log(coordinates.lon);
+
+        const response2 = await fetch(url1 + `&lat=${coordinates.lat}` + `&lon=${coordinates.lon}` + `&appid=${api}`);
+        var data2 = await response2.json();
+        console.log(data2);
+
+        document.querySelector(".city").innerHTML = data2.name;
+        document.querySelector(".number").innerHTML = Math.round(data2.main.temp);
+
+        switch(data2.weather[0].main){
+            case "Clouds":
+                weatherIcon.src = "images/clouds.png"
+                break;
+            case "Clear":
+                weatherIcon.src = "images/clear.png"
+                break;
+            case "Rain":
+                weatherIcon.src = "images/rain.png"
+                break;
+            case "Drizzle":
+                weatherIcon.src = "images/drizzle.png"
+                break;
+            case "Mist":
+                weatherIcon.src = "images/clouds.png"
+                break;
+            case "Snow":
+                weatherIcon.src = "images/snow.png"
+                break;
+            default:
+                weatherIcon.src = "images/clouds.png"
+                break;
+        }
+    }
+
+    searchBtn.addEventListener("click", ()=>{
+        checkWeather(searchBox.value);
+    })
+
+
+</script>
 </html>

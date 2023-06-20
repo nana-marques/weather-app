@@ -37,7 +37,7 @@ label{
   align-items: center;
 }
 
-.input{
+.searching{
   margin-top: 1.5rem;
   margin-left: 1.5rem;
   padding-left: 1rem;
@@ -48,7 +48,7 @@ label{
   border: 0;
 }
 
-.submit{
+#submitBtn{
   margin-top: 1.5rem;
   width: 3rem;
   height: 2.5rem;
